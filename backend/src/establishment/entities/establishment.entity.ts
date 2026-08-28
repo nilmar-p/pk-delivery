@@ -1,14 +1,12 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { UserEntity } from "../../user/entities/user.entity";
 
 @Entity()
 export class EstablishmentEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ name: 'owner_id' })
-    ownerId: string;
-
-    @ManyToOne(() => User, (user) => user.establishment, { onDelete: 'CASCADE' })
+    @ManyToOne(() => UserEntity, { onDelete: 'RESTRICT', onUpdate: 'CASCADE' })
     @JoinColumn({ name: 'owner_id' })
-    owner: User;
+    owner: UserEntity;
 }

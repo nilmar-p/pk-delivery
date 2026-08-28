@@ -1,11 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { FileEntity } from './entities/file.entity.js';
-import { FileStorageService } from '../common/utils/file-upload.util.js';
+import { UserFileEntity } from './entities/user-file.entity';
+import { FileEntity } from './entities/file.entity';
+import { FileStorageService } from '../common/utils/file-upload.util';
+
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([FileEntity]),
+        TypeOrmModule.forFeature([FileEntity, UserFileEntity]),
     ],
     providers: [FileStorageService],
     exports: [FileStorageService],

@@ -3,7 +3,7 @@ import path from "path";
 import * as fs from 'fs/promises';
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
-import { FileEntity } from "../../file/entities/file.entity.js";
+import { FileEntity } from "../../file/entities/file.entity";
 
 @Injectable()
 export class FileStorageService {
