@@ -1,13 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller.js';
 import { ConfigModule } from '@nestjs/config';
-import { AppService } from './app.service.js';
-import { EstablishmentModule } from './establishment/establishment.module.js';
-import databaseConfig from './config/database.config.js';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { UserModule } from './user/user.module.js';
-import { FileModule } from './file/file.module.js';
+
 import * as path from 'path';
+import databaseConfig from './config/database.config';
+import { EstablishmentModule } from './establishment/establishment.module';
+import { UserModule } from './user/user.module';
+import { FileModule } from './file/file.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -15,6 +17,11 @@ import * as path from 'path';
       isGlobal: true,
       envFilePath: '.env',
       load: [databaseConfig],
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [databaseConfig.KEY],
+      useFactory: (config) => config,
     }),
     ServeStaticModule.forRoot({
       rootPath: path.resolve(process.cwd(), 'files'),

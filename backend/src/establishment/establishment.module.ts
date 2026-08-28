@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
-import { EstablishmentController } from './establishment.controller.js';
-import { EstablishmentService } from './establishment.service.js';
+import { EstablishmentController } from './establishment.controller';
+import { EstablishmentService } from './establishment.service';
+
 
 @Module({
   controllers: [EstablishmentController],

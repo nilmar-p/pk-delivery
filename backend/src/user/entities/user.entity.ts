@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { UserRole } from "../enums/user-role.enum.js";
-import { EstablishmentEntity } from "../../establishment/entities/establishment.entity.js";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UserRole } from "../enums/user-role.enum";
+import { UserFileEntity } from "../../file/entities/user-file.entity";
+
 
 @Entity('user')
 export class UserEntity {
@@ -34,8 +35,8 @@ export class UserEntity {
     })
     role: UserRole;
 
-    @OneToMany(() => EstablishmentEntity, (establishment) => establishment.owner)
-    establishments: EstablishmentEntity[];
+    @OneToMany(() => UserFileEntity, (userFile) => userFile.user, { cascade: true })
+    userFile: UserFileEntity[];
 
     @CreateDateColumn()
     createdAt: Date;
