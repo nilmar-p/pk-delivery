@@ -5,6 +5,8 @@ import { AppService } from './app.service.js';
 import { EstablishmentModule } from './establishment/establishment.module.js';
 import databaseConfig from './config/database.config.js';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { UserModule } from './user/user.module.js';
+import { FileModule } from './file/file.module.js';
 import * as path from 'path';
 
 @Module({
@@ -18,7 +20,9 @@ import * as path from 'path';
       rootPath: path.resolve(process.cwd(), 'files'),
       serveRoot: '/resource/files', // http://localhost:3000/resource/files/
     }),
-    EstablishmentModule],
+    EstablishmentModule,
+    UserModule,
+    FileModule],
   controllers: [AppController],
   providers: [AppService],
 })
